@@ -1,0 +1,19 @@
+import requests
+from Practice import name_generator
+
+api_key = '0d23335ad1f134aa17abc58ee8bb5b00ee562b0a'
+
+first_name = 'matthew'
+last_name = 'Kyller'
+email_alias = '@wellington.com'
+
+names = []
+
+name_generator(first_name,last_name,email_alias, names)
+
+for name in names:
+
+            url = f'https://api.hunter.io/v2/email-verifier?email={name}&api_key={api_key}'
+            response = requests.get(url)
+            data = response.json()
+            print(name + ' - ' + data['data']['status'])
